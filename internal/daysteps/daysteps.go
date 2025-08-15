@@ -26,14 +26,14 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	// Преобразуем количество шагов в число
 	steps, errSteps := strconv.Atoi(sepData[0])
-	if errSteps != nil || ds.Steps <= 0 {
+	if errSteps != nil || steps <= 0 {
 		return fmt.Errorf("ошибка преобразования числа шагов: %s", sepData[0])
 	}
 	ds.Steps = steps
 
 	//Парсинг времени
 	duration, errTime := time.ParseDuration(sepData[1])
-	if errTime != nil || ds.Duration <= 0 {
+	if errTime != nil || duration <= 0 {
 		return fmt.Errorf("ошибка преобразования времени ходьбы: %s", sepData[1])
 	}
 	ds.Duration = duration
