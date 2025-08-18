@@ -18,9 +18,9 @@ func Info(dataset []string, dp DataParser) {
 			log.Println(err)
 			continue
 		}
-		s, errAI := dp.ActionInfo()
-		if errAI != nil {
-			log.Println(errAI)
+		s, err := dp.ActionInfo()
+		if err != nil {
+			log.Println(err)
 		}
 		fmt.Println(s)
 	}

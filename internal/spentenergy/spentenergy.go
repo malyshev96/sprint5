@@ -16,7 +16,7 @@ const (
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// Проверка входных параметров
 	if steps <= 0 || weight <= 0 || height <= 0 || duration <= 0 {
-		return 0, fmt.Errorf("параметры должны быть больше 0")
+		return 0, fmt.Errorf("данные должны быть больше 0. Шаги:%d, Вес:%f, Рост:%f, Продолжительность:%s,", steps, weight, height, duration)
 	}
 
 	//Расчет калорий
@@ -29,7 +29,7 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// Проверка входных параметров
 	if steps <= 0 || weight <= 0 || height <= 0 || duration <= 0 {
-		return 0, fmt.Errorf("параметры должны быть больше 0")
+		return 0, fmt.Errorf("данные должны быть больше 0. Шаги:%d, Вес:%f, Рост:%f, Продолжительность:%s,", steps, weight, height, duration)
 	}
 
 	//Расчет калорий

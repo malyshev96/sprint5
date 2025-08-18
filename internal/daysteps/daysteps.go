@@ -21,20 +21,26 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	// Проверяем правильность разделения
 	if len(sepData) != 2 {
-		return fmt.Errorf("не удалось обработать данные")
+		return fmt.Errorf("incorrect input data:%s", datastring)
 	}
 
 	// Преобразуем количество шагов в число
-	steps, errSteps := strconv.Atoi(sepData[0])
-	if errSteps != nil || steps <= 0 {
-		return fmt.Errorf("ошибка преобразования числа шагов: %s", sepData[0])
+	steps, err := strconv.Atoi(sepData[0])
+	if err != nil {
+		return fmt.Errorf("ошибка преобразования числа шагов: %s, Ошибка:%w", sepData[0], err)
+	}
+	if steps <= 0 {
+		return fmt.Errorf("количество шагов 0 или меньше: %s", sepData[0])
 	}
 	ds.Steps = steps
 
 	//Парсинг времени
-	duration, errTime := time.ParseDuration(sepData[1])
-	if errTime != nil || duration <= 0 {
-		return fmt.Errorf("ошибка преобразования времени ходьбы: %s", sepData[1])
+	duration, err := time.ParseDuration(sepData[1])
+	if err != nil{
+		return fmt.Errorf("ошибка преобразования времени ходьбы: %s, Ошибка:%w", sepData[1], err)
+	}
+	if duration <= 0 {
+		return fmt.Errorf("продолжительность тренировки 0 или меньше: %s", sepData[1])
 	}
 	ds.Duration = duration
 	return nil
@@ -43,7 +49,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 func (ds DaySteps) ActionInfo() (string, error) {
 	//Проверка на ноль
 	if ds.Steps <= 0 || ds.Duration <= 0 || ds.Weight <= 0 || ds.Height <= 0 {
-		return "", fmt.Errorf("данные должны быть больше 0")
+		return "", fmt.Errorf("данные должны быть больше 0. Шаги:%d, Продолжительность:%s, Вес:%f, Рост:%f", ds.Steps, ds.Duration, ds.Weight, ds.Height)
 	}
 
 	//Вычисление дистанции и калорий
